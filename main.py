@@ -39,8 +39,6 @@ def load_vgg(sess, vgg_path):
     layer3_out = graph.get_tensor_by_name(vgg_layer3_out_tensor_name)
     layer4_out = graph.get_tensor_by_name(vgg_layer4_out_tensor_name)
     layer7_out = graph.get_tensor_by_name(vgg_layer7_out_tensor_name)
-    print('image_input.shape')
-    print(image_input.shape)
     return image_input, keep_prob, layer3_out, layer4_out, layer7_out
 tests.test_load_vgg(load_vgg, tf)
 
@@ -55,14 +53,6 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
     :return: The Tensor for the last layer of output
     """
     # TODO: Implement function
-    # print('vgg_layer3_out.shape')
-    # print(vgg_layer3_out.shape)
-    # print('vgg_layer4_out.shape')
-    # print(vgg_layer4_out.shape)
-    # print('vgg_layer7_out.shape')
-    # print(vgg_layer7_out.shape)
-
-    # tf.Print(vgg_layer3_out, tf.shape(vgg_layer3_out))
     
     conv1x1 = tf.layers.conv2d(vgg_layer7_out, num_classes, 1, 1)
 
@@ -131,7 +121,7 @@ def run():
     image_shape = (160, 576)
     data_dir = './data'
     runs_dir = './runs'
-    batch_size = 10
+    batch_size = 4
     tests.test_for_kitti_dataset(data_dir)
 
     # Download pretrained vgg model
