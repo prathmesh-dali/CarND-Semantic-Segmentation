@@ -54,17 +54,17 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
     """
     # TODO: Implement function
     
-    conv1x1 = tf.layers.conv2d(vgg_layer7_out, num_classes, 1, 1)
+    conv1x1 = tf.layers.conv2d(vgg_layer7_out, num_classes, 1, 1, padding='same')
 
-    transpose_conv1 = tf.layers.conv2d_transpose(conv1x1, num_classes, 4, 2)
+    transpose_conv1 = tf.layers.conv2d_transpose(conv1x1, num_classes, 4, 2, padding='same')
 
-    skip_1 = tf.add(transpose_conv1, tf.layers.conv2d(vgg_layer4_out, num_classes, 1, 1))
+    skip_1 = tf.add(transpose_conv1, tf.layers.conv2d(vgg_layer4_out, num_classes, 1, 1, padding='same'))
 
-    transpose_conv2 = tf.layers.conv2d_transpose(skip_1, num_classes, 4, 2)
+    transpose_conv2 = tf.layers.conv2d_transpose(skip_1, num_classes, 4, 2, padding='same')
 
-    skip_2 = tf.add(transpose_conv2, tf.layers.conv2d(vgg_layer3_out, num_classes, 1, 1))
+    skip_2 = tf.add(transpose_conv2, tf.layers.conv2d(vgg_layer3_out, num_classes, 1, 1, padding='same'))
 
-    transpose_conv3 = tf.layers.conv2d_transpose(skip_2, num_classes, 16, 8)
+    transpose_conv3 = tf.layers.conv2d_transpose(skip_2, num_classes, 16, 8, padding='same')
     return transpose_conv3
 tests.test_layers(layers)
 
