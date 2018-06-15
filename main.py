@@ -131,6 +131,7 @@ def run():
     # OPTIONAL: Train and Inference on the cityscapes dataset instead of the Kitti dataset.
     # You'll need a GPU with at least 10 teraFLOPS to train on.
     #  https://www.cityscapes-dataset.com/
+    builder = tf.saved_model.builder.SavedModelBuilder('./SavedModel/')
 
     with tf.Session() as sess:
         # Path to vgg model
@@ -154,10 +155,16 @@ def run():
         train_nn(sess, epochs, batch_size, get_batches_fn, train_op, cross_entropy_loss, image_input,
                  correct_labels, keep_prob, learning_rate)
 
+        builder.add_meta_graph_and_variables(sess,
+                                       [tf.saved_model.tag_constants.TRAINING],
+                                       signature_def_map=None,
+                                       assets_collection=None)
+
         # TODO: Save inference data using helper.save_inference_samples
         helper.save_inference_samples(runs_dir, data_dir, sess, image_shape, logits, keep_prob, image_input)
 
         # OPTIONAL: Apply the trained model to a video
+    builder.save() 
 
 
 if __name__ == '__main__':
