@@ -5,7 +5,7 @@ Objective of this project is to lable non road and road pixels in image by using
 ### Architecture
 - Number of classes 2: road and non road
 - Pretrained VGG16 network is converted into Fully Convolutional neural network by replacing fully connected layers by 1x1 convolutional layers.
-- To improve performance skip layers are added. Layer 4 output is added to upsampled output of layer 7 and then Layer 3 output is added to upsampled output of above mentioned skip layer.
+- To improve performance skip connection layers are added. Layer 4 output is added to upsampled output of layer 7 and then Layer 3 output is added to upsampled output of above mentioned skip connection layer.
 - Used kernel and stride values are provided in the classroom.
 - Adam optimizer along with cross entropy cost function is used.
 
